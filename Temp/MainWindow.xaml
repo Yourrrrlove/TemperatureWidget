@@ -11,6 +11,7 @@
         <Label x:Name="label_Copy" Content="Humidity" HorizontalAlignment="Left" Margin="301,34,0,0" VerticalAlignment="Top" Height="41" Width="110" FontWeight="Bold" FontFamily="Segoe UI Black" FontSize="22"/>
         <TextBlock x:Name="temp" HorizontalAlignment="Left" Margin="67,94,0,0" TextWrapping="Wrap" Text="00.0" VerticalAlignment="Top" Height="107" Width="166" FontWeight="Bold" FontSize="72" FontFamily="Segoe UI Black"/>
         <TextBlock x:Name="humid" HorizontalAlignment="Left" Margin="284,94,0,0" TextWrapping="Wrap" Text="00.0" VerticalAlignment="Top" Height="107" Width="161" FontWeight="Bold" FontSize="72" FontFamily="Segoe UI Black"/>
+        <Ellipse x:Name="portStatus" Fill="#FF2AD907" HorizontalAlignment="Left" Height="17" Margin="481,287,0,0" Stroke="Black" VerticalAlignment="Top" Width="16" RenderTransformOrigin="0.465,0.506"/>
 
     </Grid>
 </Window>

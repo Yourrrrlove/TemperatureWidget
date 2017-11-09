@@ -14,6 +14,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO.Ports;
 using System.Threading;
+using System.Media;
+using System.Timers;
+
 
 
 namespace Temp
@@ -24,6 +27,7 @@ namespace Temp
     public partial class MainWindow : Window
     {
         SerialPort serial = new SerialPort("COM3", 9600, Parity.None, 8, StopBits.One);
+        System.Timers.Timer checkPort = new System.Timers.Timer();
 
 
         public MainWindow()
@@ -32,10 +36,29 @@ namespace Temp
             
             serial.Open();
             serial.DataReceived += Serial_DataReceived;
+           
+            checkPort.Interval = 1000;
+            checkPort.Elapsed += CheckPort_Elapsed;
+            checkPort.Start();
             
            
              
 
+        }
+
+        private void CheckPort_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            checkPort.Stop();
+            if (!serial.IsOpen)
+            {
+                this.Dispatcher.Invoke(() =>
+                {
+                    SolidColorBrush red = new SolidColorBrush();
+                    red.Color = Color.FromRgb(255, 0, 0);
+                    portStatus.Fill = red;
+                });
+            }
+            checkPort.Start();
         }
 
         private void Serial_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -49,13 +72,14 @@ namespace Temp
                 {
                     temp.Text = buff[0];
                     humid.Text = buff[1];
+                   
                 }
                 
             });
             
         }
 
-        public void updateUI(String Tem, String hum)
+        public void updateUI()
         {
             
 
